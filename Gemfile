@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 ruby '2.2.1'
 
-
 group :production do
   # Postgres database on heroku
   gem 'pg'
@@ -14,6 +13,11 @@ end
 
 group :development do
   gem 'sqlite3'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'nyan-cat-formatter'
 end
 
 # Use SCSS for stylesheets
