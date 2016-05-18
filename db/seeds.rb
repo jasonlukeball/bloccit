@@ -4,10 +4,7 @@ require 'random_data'
 Post.find_or_create_by(title: "Unique Post Title", body: "Unique Post Body")
 
 50.times do
-  Post.create!(
-        title:  Faker::Hipster.sentence,
-        body:   Faker::Hipster.paragraph
-  )
+  Post.create!(title:  Faker::Hipster.sentence, body:   Faker::Hipster.paragraph)
 end
 
 posts = Post.all
