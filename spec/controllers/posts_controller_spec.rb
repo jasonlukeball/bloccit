@@ -22,7 +22,6 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-
     describe "POST create" do
 
       it "increases the number of posts by 1" do
