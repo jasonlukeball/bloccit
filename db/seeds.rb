@@ -21,8 +21,13 @@ end
   Advertisement.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, price: rand(0..100))
 end
 
+50.times do
+  Question.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, resolved: rand(0..1))
+end
+
 
 puts "DB Seed Finished!"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} advertisements created"
+puts "#{Question.count} questions created"

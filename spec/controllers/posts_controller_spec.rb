@@ -61,7 +61,7 @@ RSpec.describe PostsController, type: :controller do
     describe "GET edit" do
 
       it "returns http success" do
-        get :edit, {id: my_post.id}
+        c
         expect(response).to have_http_status :success
       end
 
@@ -82,7 +82,7 @@ RSpec.describe PostsController, type: :controller do
 
     describe "PUT update" do
 
-      it "updated the post with expected attributes" do
+      it "updates the post with expected attributes" do
 
         new_title = Faker::Hipster.sentence
         new_body  = Faker::Hipster.paragraph

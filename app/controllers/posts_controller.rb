@@ -12,7 +12,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-
   def create
     # we call Post.new to create a new instance of Post.
     @post = Post.new
@@ -32,11 +31,9 @@ class PostsController < ApplicationController
     end
   end
 
-
   def edit
     @post = Post.find(params[:id])
   end
-
 
   def update
     @post = Post.find(params[:id])
