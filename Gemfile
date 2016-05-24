@@ -20,6 +20,7 @@ group :development, :test do
   gem 'nyan-cat-formatter'
   gem 'pry-rails'
   gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'shoulda'
 end
 
 # Use SCSS for stylesheets
