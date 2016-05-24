@@ -9,6 +9,7 @@ group :production do
   gem 'pg'
   # Required for assets pipeline on heroku
   gem 'rails_12factor'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
 end
 
 group :development do
