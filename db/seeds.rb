@@ -32,6 +32,24 @@ end
 posts = Post.all
 
 
+# sponsored posts
+# -------------------
+
+SponsoredPost.find_or_create_by(title: "Unique Post Title", body: "Unique Post Body", price: 100)
+
+50.times do
+  SponsoredPost.create!(
+    topic: topics.sample,
+    title: Faker::Hipster.sentence,
+    body: Faker::Hipster.paragraph,
+    price: rand(0..1000)
+  )
+end
+
+sponsored_posts = SponsoredPost.all
+
+
+
 # comments
 # -------------------
 
@@ -58,6 +76,7 @@ end
 puts "DB Seed Finished!"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
+puts "#{SponsoredPost.count} sponsored posts created"
 puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} advertisements created"
 puts "#{Question.count} questions created"

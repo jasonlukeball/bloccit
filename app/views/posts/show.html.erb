@@ -2,6 +2,7 @@
 <div class="row">
   <div class="col-md-8">
     <p><%= @post.body%></p>
+    <%= link_to "< Back to Topic", topic_path(@post.topic.id) %>
   </div>
   <div class="col-md-4">
     <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
