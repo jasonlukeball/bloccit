@@ -24,7 +24,7 @@ class SponsoredPostsController < ApplicationController
       flash[:notice] = "Sponsored Post saved successfully!"
       redirect_to [@topic, @sponsored_post]
     else
-      flash[:error] = "Error! Sponsored Post could not be saved! Please try again"
+      flash[:alert] = "Error! Sponsored Post could not be saved! Please try again"
       render :new
     end
   end

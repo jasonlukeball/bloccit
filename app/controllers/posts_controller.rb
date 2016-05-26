@@ -27,7 +27,7 @@ class PostsController < ApplicationController
       redirect_to [@topic, @post]
     else
       # if saving the instance of post was not successful, we display an error message and render the new view again.
-      flash[:error] = 'There was an error saving the post. Please try again'
+      flash[:alert] = 'There was an error saving the post. Please try again'
       render :new
     end
   end
@@ -45,7 +45,8 @@ class PostsController < ApplicationController
       flash[:notice] = "Post successfully updated!"
       redirect_to [@post.topic, @post]
     else
-      flash[:error] = "Error updating post, please try again"
+      flash[:alert] = "Error updating post, please try again"
+      render :edit
     end
   end
 
@@ -55,7 +56,7 @@ class PostsController < ApplicationController
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
       redirect_to @post.topic
     else
-      flash[:error] = "Post could not be deleted, please try again"
+      flash[:alert] = "Post could not be deleted, please try again"
     end
 
   end

@@ -22,7 +22,7 @@ class AdvertisementsController < ApplicationController
       flash[:notice] = 'Advertisement was saved.'
       redirect_to @advertisement
     else
-      flash[:error] = 'Post was NOT successfully saved, please try again!'
+      flash[:alert] = 'Post was NOT successfully saved, please try again!'
     end
 
   end
