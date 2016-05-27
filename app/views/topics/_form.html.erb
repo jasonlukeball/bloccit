@@ -1,12 +1,5 @@
 <% if topic.errors.any? %>
-    <div class="alert - alert-danger">
-      <h4><%= pluralize(topic.errors.count, 'error')%></h4>
-      <ul>
-        <% topic.errors.full_messages.each do |error_message| %>
-            <li><%= error_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <%= display_errors(pluralize(topic.errors.count, 'error'), topic.errors.full_messages) %>
 <% end %>
 
 

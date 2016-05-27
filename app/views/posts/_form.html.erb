@@ -1,12 +1,9 @@
 <% if post.errors.any? %>
-    <div class="alert - alert-danger">
-      <h4><%= pluralize(post.errors.count, 'error')%></h4>
-      <ul>
-        <% post.errors.full_messages.each do |error_message| %>
-            <li><%= error_message %></li>
-            <% end %>
-      </ul>
-    </div>
+    <%= display_errors(pluralize(post.errors.count, 'error'), post.errors.full_messages) %>
+<% end %>
+
+<% if post.errors.any? %>
+    <%= display_errors_v2(pluralize(post.errors.count, 'error'), post.errors.full_messages) %>
 <% end %>
 
 
