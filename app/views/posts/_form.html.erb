@@ -2,7 +2,6 @@
     <%= display_errors(pluralize(post.errors.count, 'error'), post.errors.full_messages) %>
 <% end %>
 
-
 <%= form_for [topic, post] do |f| %>
     <%= form_group_tag(post.errors[:title]) do %>
       <%= f.label :title %>
