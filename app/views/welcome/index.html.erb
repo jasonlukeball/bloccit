@@ -1,8 +1,28 @@
-<div class="col-md-8">
-  <h1>Welcome to Bloccit</h1>
-  <p>This is the homepage for Bloccit</p>
+<br>
+<div class="jumbotron">
+  <h1>Reddit</h1>
+  <p>This is a reddit clone.<p>
+  <p>To practice fundamentals of Ruby on Rails Development</p>
+  <p>
+    <%= link_to "Sign Up Now", new_user_path, class: 'btn btn-success' %>
+  </p>
 </div>
 
+<div class="row">
 
+  <div class="col-md-4">
+    <h2><%= Faker::Hipster.words(2).join(' ') %></h2>
+    <p><%= Faker::Hipster.paragraph %></p>
+  </div>
 
+  <div class="col-md-4">
+    <h2><%= Faker::Hipster.words(2).join(' ') %></h2>
+    <p><%= Faker::Hipster.paragraph %></p>
+  </div>
 
+  <div class="col-md-4">
+    <h2><%= Faker::Hipster.words(2).join(' ') %></h2>
+    <p><%= Faker::Hipster.paragraph %></p>
+  </div>
+
+</div>
