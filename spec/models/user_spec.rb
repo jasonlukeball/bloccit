@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) {User.create!(name: "Jason Ball", email: "jasonlukeball@me.com", password: "password")}
+  let(:user) {User.create!(name: "Example User", email: "user@example.com", password: "password")}
 
   # Name
   it { is_expected.to validate_presence_of(:name) }
@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email) }
   it { is_expected.to validate_length_of(:email).is_at_least(3) }
-  it { is_expected.to allow_value("jasonlukeball@me.com").for(:email) }
+  it { is_expected.to allow_value("user@example.com").for(:email) }
 
   # Password
   it { is_expected.to validate_presence_of(:password) }
@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
 
   describe "attributes" do
     it "should have name and email attributes" do
-      expect(user).to have_attributes(name: "Jason Ball", email: "jasonlukeball@me.com")
+      expect(user).to have_attributes(name: "Example User", email: "user@example.com")
     end
   end
 
