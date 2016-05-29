@@ -25,12 +25,6 @@ RSpec.describe User, type: :model do
       expect(user).to have_attributes(name: "Example User", email: "user@example.com")
     end
 
-    it "should capitalize each word in the user's name" do
-      user.name = "lower case user name"
-      user.save
-      expect(user.name).to eq "Lower Case User Name"
-    end
-
   end
 
   describe "invalid user" do
@@ -44,6 +38,19 @@ RSpec.describe User, type: :model do
 
     it "should be an invalid user due to blank email address" do
       expect(user_with_invalid_email).to_not be_valid
+    end
+
+  end
+
+
+  describe "user name capitalization" do
+
+    let(:user_with_lower_case_name) {User.new(name: "example user", email: "user2@example.com", password: "password")}
+
+    it "should capitalize user's name" do
+      Rails.logger.debug ">>>>> user: #{user_with_lower_case_name.inspect}"
+      user_with_lower_case_name.save
+      expect(user_with_lower_case_name.name).to eq "Example User"
     end
 
   end
