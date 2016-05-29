@@ -2,16 +2,19 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.name = params[:user][:name]     if params[:user].present?
+    @user.email = params[:user][:email]   if params[:user].present?
+  end
+
+  def confirm
   end
 
   def create
     @user = User.new
-    @user.update_attributes(
-      name: params[:user][:name],
-      email: params[:user][:email],
-      password: params[:user][:password],
-      password_confirmation: params[:user][:password_confirmation]
-    )
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
 
     if @user.save
       flash[:notice] = "Welcome to Reddit #{@user.name}!"
@@ -22,14 +25,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def confirm
-    @user = User.new
-    @user.update_attributes(
-      name: params[:user][:name],
-      email: params[:user][:email],
-      password: params[:user][:password],
-      password_confirmation: params[:user][:password_confirmation]
-    )
-  end
+
 
 end
