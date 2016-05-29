@@ -1,0 +1,8 @@
+<h1>Sign Up Confirmation</h1>
+<p>Are you sure these details are correct?</p>
+
+<p><%= "Name: #{params[:user][:name]}" %></p>
+<p><%= "Email: #{params[:user][:email]}" %></p>
+
+<%= link_to 'Yes', users_path(params), :method => :post, class: 'btn btn-success' %>
+<%= link_to 'No', new_user_path(params), :method => :get, class: 'btn btn-default' %>
