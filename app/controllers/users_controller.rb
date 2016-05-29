@@ -22,4 +22,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def confirm
+    @user = User.new
+    @user.update_attributes(
+      name: params[:user][:name],
+      email: params[:user][:email],
+      password: params[:user][:password],
+      password_confirmation: params[:user][:password_confirmation]
+    )
+  end
+
 end
