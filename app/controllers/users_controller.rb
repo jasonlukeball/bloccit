@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "Welcome to Reddit #{@user.name}!"
+      create_session(@user)
       redirect_to root_path
     else
       flash[:alert] = "There was an error creating your account, please try again!"
