@@ -3,6 +3,21 @@ require 'random_data'
 
 
 
+# users
+# -------------------
+
+User.create!(name: "Example User", email: "user@example.com", password: "password")
+
+5.times do
+  User.create!(
+        name:     Faker::Name.name,
+        email:    Faker::Internet.email,
+        password: Faker::Internet.password(8)
+  )
+end
+
+users = User.all
+
 # topics
 # -------------------
 
@@ -23,6 +38,7 @@ Post.find_or_create_by(title: "Unique Post Title", body: "Unique Post Body")
 
 50.times do
   Post.create!(
+    user: users.sample,
     topic: topics.sample,
     title: Faker::Hipster.sentence,
     body: Faker::Hipster.paragraph
@@ -74,6 +90,7 @@ end
 
 
 puts "DB Seed Finished!"
+puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{SponsoredPost.count} sponsored posts created"

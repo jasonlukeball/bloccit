@@ -1,6 +1,13 @@
 <h1><%= @post.title%></h1>
+<small>
+  <b><%= @post.user.name %></b>
+  <br>
+  submitted <%= time_ago_in_words(@post.created_at) %> ago
+</small>
+
 <div class="row">
   <div class="col-md-8">
+    <br>
     <p><%= @post.body%></p>
     <%= link_to "< Back to Topic", topic_path(@post.topic.id) %>
   </div>
@@ -9,5 +16,6 @@
     <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
   </div>
 </div>
+
 
 

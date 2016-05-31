@@ -8,13 +8,16 @@ RSpec.describe Post, type: :model do
   let(:post_body)           { Faker::Hipster.paragraph }
 
   let(:topic)               { Topic.create!(name: topic_name, description: topic_description) }
-  let(:post)                { topic.posts.create!(title: post_title, body: post_body) }
+  let(:user)                { User.create!(name: "Example User", email: "user@example.com", password: "password")}
+  let(:post)                { topic.posts.create!(title: post_title, body: post_body, user: user) }
 
   it { is_expected.to belong_to(:topic) }
+  it { is_expected.to belong_to(:user) }
 
   it { is_expected.to validate_presence_of :title }
   it { is_expected.to validate_presence_of :body }
   it { is_expected.to validate_presence_of :topic }
+  it { is_expected.to validate_presence_of :user }
 
   it { is_expected.to validate_length_of(:title).is_at_least(5) }
   it { is_expected.to validate_length_of(:body).is_at_least(20) }
@@ -22,8 +25,8 @@ RSpec.describe Post, type: :model do
 
 
   describe "attributes" do
-    it "has the title and body attributes" do
-      expect(post).to have_attributes(title: post_title, body: post_body)
+    it "has the title, body and user attributes" do
+      expect(post).to have_attributes(title: post_title, body: post_body, user: user)
     end
   end
 
