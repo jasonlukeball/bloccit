@@ -6,7 +6,8 @@ require 'random_data'
 # users
 # -------------------
 
-User.create!(name: "Example User", email: "user@example.com", password: "password")
+admin   = User.create!(name: "Admin User", email: "admin@example.com", password: "password", role: 'admin')
+member  = User.create!(name: "Member User", email: "member@example.com", password: "password", role: 'member')
 
 5.times do
   User.create!(

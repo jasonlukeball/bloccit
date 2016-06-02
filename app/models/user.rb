@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   before_save :downcase_email
   before_save :capitalize_name
+  before_save :define_role
 
   validates :name, length: {minimum: 1, maximum: 100}, presence: true
 
@@ -18,6 +19,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  enum role: [:member, :admin]
+
 
   def downcase_email
     self.email = email.downcase if email.present?
@@ -26,6 +29,11 @@ class User < ActiveRecord::Base
 
   def capitalize_name
     self.name = name.split.map { |name_part| name_part.capitalize }.join(' ') if name
+  end
+
+  def define_role
+    self.role ||= :member
+    # shorthand for self.role = :member if self.role.nil?
   end
 
 
