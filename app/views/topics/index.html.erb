@@ -1,6 +1,6 @@
 <h1>
   Topics
-  <% if user_is_authorised_for_topics? %>
+  <% if user_is_authorised_to_create_or_delete_topics? %>
     <%= link_to "New Topic", new_topic_path, class: 'btn btn-success'%>
   <% end %>
 </h1>

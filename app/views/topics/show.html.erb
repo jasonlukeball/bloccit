@@ -1,6 +1,10 @@
 <h1><%= @topic.name %></h1>
-<% if user_is_authorised_for_topics? %>
+
+<% if user_is_authorised_to_edit_topics? %>
     <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-success' %>
+<% end %>
+
+<% if user_is_authorised_to_create_or_delete_topics? %>
     <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger' %>
 <% end %>
 <br><br>
@@ -45,7 +49,7 @@
     <% if current_user %>
         <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
     <% end %>
-    <% if current_user.admin? %>
+    <% if current_user && current_user.admin? %>
         <%= link_to "New Sponsored Post", new_topic_sponsored_post_path(@topic), class: 'btn btn-success' %>
     <% end %>
   </div>

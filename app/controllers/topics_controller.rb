@@ -1,7 +1,8 @@
 class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
-  before_action :authorise_user, except: [:index, :show]
+  before_action :authorise_user_create_delete, only: [:new, :create, :destroy]
+  before_action :authorise_user_edit_update, only: [:edit, :update]
 
 
   def index
@@ -70,9 +71,16 @@ class TopicsController < ApplicationController
     params.require(:topic).permit(:name, :description, :public)
   end
 
-  def authorise_user
+  def authorise_user_create_delete
     unless current_user.admin?
       flash[:alert] = "Sorry, you must be an admin to do that!"
+      redirect_to topics_path
+    end
+  end
+
+  def authorise_user_edit_update
+    unless current_user.moderator? || current_user.admin?
+      flash[:alert] = "Sorry, you must be a moderator or an admin to do that!"
       redirect_to topics_path
     end
   end
