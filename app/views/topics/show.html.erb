@@ -14,36 +14,10 @@
     <p class="lead"><%= @topic.description%></p>
     <br>
     <h4>Posts</h4>
-    <% @topic.posts.each do |post| %>
-    <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to post.title, topic_post_path(@topic, post) %>
-          </h4>
-          <small>
-            <b><%= post.user.name %></b>
-            <br>
-            submitted <%= time_ago_in_words(post.created_at) %> ago
-            <br>
-            <%= pluralize(post.comments.count, 'Comment', 'Comments') %>
-          </small>
-        </div>
-    </div>
-    <% end %>
-
+    <%= render @topic.posts %>
     <br><br>
     <h4>Sponsored Posts</h4>
-    <% @topic.sponsored_posts.each do |sponsored_post| %>
-        <div class="media">
-          <div class="media-body">
-            <h4 class="media-heading">
-              <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %>
-            </h4>
-          </div>
-        </div>
-    <% end %>
-
-
+    <%= render @topic.sponsored_posts %>
   </div>
   <div class="col-md-4">
     <% if current_user %>
