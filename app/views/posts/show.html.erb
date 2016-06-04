@@ -9,7 +9,15 @@
   <div class="col-md-8">
     <br>
     <p><%= @post.body%></p>
-    <%= link_to "< Back to Topic", topic_path(@post.topic.id) %>
+    <br>
+    <%= link_to "Back to Topic", topic_path(@post.topic.id) %>
+    <div>
+      <h3>Comments</h3>
+      <%= render @post.comments %>
+    </div>
+    <% if current_user %>
+        <%= render 'comments/form', comment: Comment.new, post: @post %>
+    <% end %>
   </div>
   <div class="col-md-4">
     <% if user_is_authorised_to_edit_post?(@post) %>

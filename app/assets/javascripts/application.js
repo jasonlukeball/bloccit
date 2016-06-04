@@ -16,3 +16,8 @@
 //= require bootstrap
 //= require_tree .
 
+$('document').ready(function() {
+    setTimeout(function() {
+        $(".alert").slideUp(150);
+    }, 3000);
+});

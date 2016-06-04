@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :posts
+  has_many :comments
 
   before_save :downcase_email
   before_save :capitalize_name

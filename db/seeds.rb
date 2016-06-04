@@ -1,6 +1,4 @@
 require 'random_data'
-# Decided to use Faker instead
-
 
 
 # users
@@ -12,21 +10,22 @@ moderator = User.create!(name: "Moderator User", email: "moderator@example.com",
 
 5.times do
   User.create!(
-        name:     Faker::Name.name,
-        email:    Faker::Internet.email,
-        password: Faker::Internet.password(8)
+    name:     Faker::Name.name,
+    email:    Faker::Internet.email,
+    password: Faker::Internet.password(8)
   )
 end
 
 users = User.all
+
 
 # topics
 # -------------------
 
 15.times do
   Topic.create!(
-         name: Faker::Hipster.sentence,
-         description: Faker::Hipster.paragraph
+    name: Faker::Hipster.sentence,
+    description: Faker::Hipster.paragraph
   )
 end
 
@@ -67,14 +66,15 @@ end
 sponsored_posts = SponsoredPost.all
 
 
-
 # comments
 # -------------------
 
 100.times do
   Comment.create!(
-           post: posts.sample,
-           body: Faker::Hipster.paragraph
+    user: users.sample,
+    post: posts.sample,
+    body: Faker::Hipster.paragraph
+
   )
 end
 
@@ -83,15 +83,24 @@ end
 # -------------------
 
 50.times do
-  Advertisement.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, price: rand(0..100))
+  Advertisement.create!(
+    title: Faker::Hipster.sentence,
+    body: Faker::Hipster.paragraph,
+    price: rand(0..100)
+  )
 end
 
 50.times do
-  Question.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, resolved: rand(0..1))
+  Question.create!(
+    title: Faker::Hipster.sentence,
+    body: Faker::Hipster.paragraph,
+    resolved: rand(0..1)
+  )
 end
 
-
+puts
 puts "DB Seed Finished!"
+puts "--------------------"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
