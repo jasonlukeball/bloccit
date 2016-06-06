@@ -9,7 +9,8 @@
   <div class="col-md-8">
     <br>
     <p><%= @post.body%></p>
-    <br>
+    <%= render partial: "labels/list", locals: { labels: @post.labels } %>
+    <br><br>
     <%= link_to "Back to Topic", topic_path(@post.topic.id) %>
     <div>
       <h3>Comments</h3>

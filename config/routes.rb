@@ -30,4 +30,7 @@ Rails.application.routes.draw do
   # questions
   resources :questions
 
+  # labels
+  resources :labels, only: [:show]
+
 end
