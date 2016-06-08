@@ -7,11 +7,11 @@ RSpec.describe Topic, type: :model do
   let(:public)        { true }
   let(:topic)         { Topic.create!(name: name, description: description)}
 
+  it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:posts) }
   it { is_expected.to have_many(:labelings) }
   it { is_expected.to have_many(:labels).through(:labelings) }
-
-
+  it { is_expected.to have_many(:comments) }
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :description }
   it { is_expected.to validate_length_of(:name).is_at_least(5) }

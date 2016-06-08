@@ -24,6 +24,7 @@ users = User.all
 
 15.times do
   Topic.create!(
+    user: admin,
     name: Faker::Hipster.sentence,
     description: Faker::Hipster.paragraph
   )
@@ -66,13 +67,26 @@ end
 sponsored_posts = SponsoredPost.all
 
 
-# comments
+# comments for posts
 # -------------------
 
-100.times do
+50.times do
   Comment.create!(
     user: users.sample,
-    post: posts.sample,
+    commentable: posts.sample,
+    body: Faker::Hipster.paragraph
+
+  )
+end
+
+
+# comments for topics
+# -------------------
+
+50.times do
+  Comment.create!(
+    user: users.sample,
+    commentable: topics.sample,
     body: Faker::Hipster.paragraph
 
   )

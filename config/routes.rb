@@ -24,6 +24,11 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  # comments for topics
+  resources :topics, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+
   # advertisements
   resources :advertisements
 

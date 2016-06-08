@@ -76,7 +76,7 @@ RSpec.describe CommentsController, type: :controller do
     describe "DELETE destroy" do
       it "does not delete the comment" do
         delete :destroy, post_id: user1_post.id, id: user1_comment.id
-        count = Comment.where(id: user1_comment.id).count
+        count = Comment.where(commentable_id: user1_comment.id).count
         expect(count).to eq 1
       end
 

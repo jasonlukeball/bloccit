@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
 
   let(:user) {User.create!(name: "Example User", email: "user@example.com", password: "password")}
 
+  it { is_expected.to have_many(:topics) }
   it { is_expected.to have_many(:posts) }
   it { is_expected.to have_many(:comments) }
 

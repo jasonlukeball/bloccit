@@ -21,6 +21,12 @@
     <br><br>
     <h4>Sponsored Posts</h4>
     <%= render @topic.sponsored_posts %>
+    <br><br>
+    <h3>Comments</h3>
+    <%= render @topic.comments %>
+    <% if current_user %>
+        <%= render 'comments/form', comment: Comment.new, post: @topic %>
+    <% end %>
   </div>
   <div class="col-md-4">
     <% if current_user %>
