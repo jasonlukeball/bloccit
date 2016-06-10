@@ -21,8 +21,7 @@ class TopicsController < ApplicationController
 
 
   def create
-    @topic = Topic.new(topic_params)
-    @topic.user = current_user
+    @topic = current_user.topics.new(topic_params)
 
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
