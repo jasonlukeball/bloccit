@@ -75,16 +75,36 @@ RSpec.describe Post, type: :model do
     end
 
     it "updates the rank when an up vote is created" do
-      old_rank = post2.rank
+      old_rank = post2.rank.round(0)
       post2.votes.create!(value: 1)
-      expect(post.rank).to eq(old_rank)
+      expect(post.rank.round(0)).to eq(old_rank)
     end
 
     it "updates the rank when a down vote is created" do
-      old_rank = post2.rank
+      old_rank = post2.rank.round(0)
       post2.votes.create!(value: -1)
-      expect(post.rank).to eq(old_rank)
+      expect(post.rank.round(0)).to eq(old_rank)
     end
   end
+
+
+  describe "create vote" do
+
+    it "adds an up_vote by the current_user for new posts" do
+      expect(post.up_votes).to eq 1
+    end
+
+    it "calls #create_vote when a post is created" do
+      post = topic.posts.new(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user)
+      expect(post).to receive(:create_vote)
+      post.save
+    end
+
+    it "the post's first vote belongs to the owner of the post" do
+      expect(post.votes.first.user).to eq(user)
+    end
+
+  end
+
 
 end

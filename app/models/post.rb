@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
   validates :user, presence: true
 
   after_create :censor
+  after_create :create_vote
 
 
   # SCOPES
@@ -44,14 +45,23 @@ class Post < ActiveRecord::Base
     self.votes.where(value: -1).count
   end
 
+
   def points
     self.votes.sum(:value)
   end
+
 
   def update_rank
     age_in_days = (self.created_at - Time.new(1970,1,1)) / 1.day.seconds
     new_rank = self.points + age_in_days
     update_attribute(:rank, new_rank)
+  end
+
+
+  private
+
+  def create_vote
+    self.user.votes.create(value: 1, post: self)
   end
 
 end
