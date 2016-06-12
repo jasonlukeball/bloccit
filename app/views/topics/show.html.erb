@@ -12,13 +12,13 @@
 <div class="row">
   <div class="col-md-8">
     <p class="lead"><%= @topic.description%></p>
-    <p class="lead">
+
       <%= render partial: "labels/list", locals: { labels: @topic.labels} %>
-    </p>
-    <br>
+
+    <br><br>
     <h4>Posts</h4>
     <%= render @topic.posts %>
-    <br><br>
+    <br><br><br><br><br><br><br><br><br>
     <h4>Sponsored Posts</h4>
     <%= render @topic.sponsored_posts %>
     <br><br>

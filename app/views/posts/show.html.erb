@@ -1,34 +1,61 @@
-<h1><%= @post.title%></h1>
-<small>
-  <b><%= @post.user.name %></b>
-  <br>
-  submitted <%= time_ago_in_words(@post.created_at) %> ago
-</small>
-
 <div class="row">
-  <div class="col-md-8">
-    <br>
-    <p><%= @post.body%></p>
-    <%= render partial: "labels/list", locals: { labels: @post.labels } %>
-    <br><br>
-    <%= link_to "Back to Topic", topic_path(@post.topic.id) %>
-    <div>
-      <h3>Comments</h3>
-      <%= render @post.comments %>
-    </div>
-    <% if current_user %>
-        <%= render 'comments/form', comment: Comment.new, post: @post %>
-    <% end %>
+  <!-- VOTER -->
+  <% if current_user %>
+  <div class="col-xs-1 voter">
+    <%= render partial: 'votes/voter', locals: { post: @post } %>
   </div>
-  <div class="col-md-4">
-    <% if user_is_authorised_to_edit_post?(@post) %>
-        <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
-    <% end %>
-    <% if user_is_authorised_to_delete_post?(@post) %>
-        <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
-    <% end %>
+  <% end %>
+
+  <!-- POST TITLE & CREATED AT -->
+  <div class="col-xs-11">
+    <div class="media-body">
+        <h1 class="media-heading">
+          <%= @post.title %>
+          <br>
+          <small>
+            submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
+          </small>
+          <br>
+        </h1>
+      <!-- POST LABELS -->
+      <%= render partial: "labels/list", locals: { labels: @post.labels } %>
+      <br><br>
+    </div>
   </div>
 </div>
 
+<div class="row">
+    <!-- EDIT / DELETE BUTTONS -->
+    <div class="col-md-4 pull-right">
+        <% if user_is_authorised_to_edit_post?(@post) %>
+            <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
+        <% end %>
+        <% if user_is_authorised_to_delete_post?(@post) %>
+            <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
+        <% end %>
+        <!-- POST POINTS -->
+        <h3>
+            <%= pluralize(@post.points, 'point') %>
+            <div>
+                <small>
+                    <%= pluralize(@post.up_votes, 'up vote') %>,
+                    <%= pluralize(@post.down_votes, 'down vote') %>
+                </small>
+            </div>
+        </h3>
+      </div>
+    <!-- POST BODY & COMMENTS -->
+    <div class="col-md-8">
+      <p class="lead"><%= @post.body%></p>
 
+      <!-- COMMENTS -->
+      <div>
+        <h3>Comments</h3>
+            <%= render @post.comments %>
+      </div>
+      <% if current_user %>
+          <%= render 'comments/form', comment: Comment.new, post: @post %>
+      <% end %>
+    </div>
 
+</div>

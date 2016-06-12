@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
 
-  has_many :posts
-  has_many :topics
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :topics, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   before_save :downcase_email
   before_save :capitalize_name
