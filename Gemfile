@@ -23,6 +23,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'faker', '~> 1.6', '>= 1.6.3'
   gem 'shoulda'
+  gem 'dotenv-rails'
 end
 
 # Use for encrypting user passwords
@@ -39,3 +40,4 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Bootstrap for style
 gem 'bootstrap-sass'
+gem 'intercom-rails'
