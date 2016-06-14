@@ -114,7 +114,14 @@ RSpec.describe Post, type: :model do
       expect(post).to receive(:create_favourite)
       post.save
     end
+  end
 
+  describe "send new post email notification" do
+    it "sends an email to the user when they create a post" do
+      post = topic.posts.new(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user)
+      expect(FavouriteMailer).to receive(:new_post).with(user, post).and_return(double(deliver_now: true))
+      post.save!
+    end
   end
 
 
