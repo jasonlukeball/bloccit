@@ -108,4 +108,14 @@ RSpec.describe Post, type: :model do
   end
 
 
+  describe "create favourite" do
+    it "calls the #create_favourite method when a post is created" do
+      post = topic.posts.new(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user)
+      expect(post).to receive(:create_favourite)
+      post.save
+    end
+
+  end
+
+
 end

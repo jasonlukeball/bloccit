@@ -16,6 +16,8 @@ class Post < ActiveRecord::Base
 
   after_create :censor
   after_create :create_vote
+  after_create :create_favourite
+  after_create :send_new_post_email_notification
 
 
   # SCOPES
@@ -63,6 +65,15 @@ class Post < ActiveRecord::Base
 
   def create_vote
     self.user.votes.create(value: 1, post: self)
+  end
+
+
+  def create_favourite
+    self.user.favourites.create(post: self, user: self.user)
+  end
+
+  def send_new_post_email_notification
+    FavouriteMailer.new_post(self.user, self).deliver_now
   end
 
 end

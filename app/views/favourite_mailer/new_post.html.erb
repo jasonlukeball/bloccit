@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    </head>
+    <body>
+        <h1> Your new post: "<%= @post.title %>"</h1>
+        <h4><%= @post.body %></h4>
+        <p>We've automatically favourited your new post, you'll receive email notifications for any comments on this post!</p>
+        <p><%= link_to "View Post", topic_post_url(@post.topic, @post) %></p>
+    </body>
+</html>
