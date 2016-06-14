@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:posts) }
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
+  it { is_expected.to have_many(:favourites) }
 
   # Name
   it { is_expected.to validate_presence_of(:name) }
@@ -44,9 +45,6 @@ RSpec.describe User, type: :model do
     end
 
   end
-
-
-
 
   describe "roles" do
 
@@ -88,11 +86,6 @@ RSpec.describe User, type: :model do
 
   end
 
-
-
-
-
-
   describe "invalid user" do
 
     let(:user_with_invalid_name)  { User.new(name: "", email: "user@example.com") }
@@ -108,7 +101,6 @@ RSpec.describe User, type: :model do
 
   end
 
-
   describe "user name capitalization" do
 
     let(:user_with_lower_case_name) {User.new(name: "example user", email: "user2@example.com", password: "password")}
@@ -117,6 +109,25 @@ RSpec.describe User, type: :model do
       Rails.logger.debug ">>>>> user: #{user_with_lower_case_name.inspect}"
       user_with_lower_case_name.save
       expect(user_with_lower_case_name.name).to eq "Example User"
+    end
+
+  end
+
+
+  describe "#favourite_for(post)" do
+
+    before do
+      topic = Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph)
+      @post = topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user)
+    end
+
+    it "returns nil if the user has not favourited the post" do
+      expect(user.favourite_for(@post)).to be_nil
+    end
+
+    it "returns the appropriate favourite if it exists" do
+      favourite = user.favourites.create!(post: @post)
+      expect(user.favourite_for(@post)).to eq(favourite)
     end
 
   end

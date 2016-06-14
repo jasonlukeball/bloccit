@@ -5,4 +5,13 @@ class Comment < ActiveRecord::Base
 
   validates :body, length: { minimum: 5 }, presence: true
 
+  after_create :send_favourite_emails
+
+
+  private
+
+  def send_favourite_emails
+    self.commentable.favourites.each {|f| FavouriteMailer.new_comment(f.user, self.commentable, self).deliver_now }
+  end
+
 end

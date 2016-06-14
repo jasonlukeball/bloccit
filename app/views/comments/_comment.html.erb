@@ -1,12 +1,14 @@
-<div class="media">
-  <div class="media-body">
-    <small>
-      <b><%= comment.user.name %></b>
-      <%= " commented #{time_ago_in_words(comment.created_at)} ago" %>
-      <% if user_can_delete_comment?(comment) %>
-          <%= delete_comment_link(comment) %>
-      <% end %>
-    </small>
-    <p><%= comment.body %></p>
-  </div>
-</div>
+<%= content_tag :div, class: 'media', id: "comment-#{comment.id}" do %>
+    <div class="media">
+      <div class="media-body">
+        <small>
+          <b><%= comment.user.name %></b>
+          <%= " commented #{time_ago_in_words(comment.created_at)} ago" %>
+          <% if user_can_delete_comment?(comment) %>
+              <%= delete_comment_link(comment) %>
+          <% end %>
+        </small>
+        <p><%= comment.body %></p>
+      </div>
+    </div>
+<% end %>

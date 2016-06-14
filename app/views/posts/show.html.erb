@@ -43,6 +43,10 @@
                 </small>
             </div>
         </h3>
+        <!-- POST FAVOURITE -->
+        <% if current_user %>
+            <%= render partial: 'favourites/favourite', locals: { post: @post} %>
+        <% end %>
       </div>
     <!-- POST BODY & COMMENTS -->
     <div class="col-md-8">

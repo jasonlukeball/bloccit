@@ -18,6 +18,7 @@ RSpec.describe Post, type: :model do
   it { is_expected.to have_many(:labelings) }
   it { is_expected.to have_many(:labels).through(:labelings) }
   it { is_expected.to have_many(:votes) }
+  it { is_expected.to have_many(:favourites) }
 
 
   it { is_expected.to validate_presence_of :title }

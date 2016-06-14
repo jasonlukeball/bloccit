@@ -19,9 +19,10 @@ Rails.application.routes.draw do
     resources :sponsored_posts, except: [:index]
   end
 
-  # post comments and votes
+  # post comments, votes & favourites
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
+    resources :favourites, only: [:create, :destroy]
     post '/up-vote' => 'votes#up_vote', as: :up_vote
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :topics, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favourites, dependent: :destroy
 
   before_save :downcase_email
   before_save :capitalize_name
@@ -34,9 +35,15 @@ class User < ActiveRecord::Base
     self.name = name.split.map { |name_part| name_part.capitalize }.join(' ') if name
   end
 
+
   def define_role
     self.role ||= :member
     # shorthand for self.role = :member if self.role.nil?
+  end
+
+
+  def favourite_for(post)
+    self.favourites.where(post_id: post.id).first
   end
 
 

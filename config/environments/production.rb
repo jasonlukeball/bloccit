@@ -76,4 +76,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # sendgrid config
+  config.action_mailer.default_url_options = { host: 'https://still-dawn-45963.herokuapp.com' }
+  config.raise_delivery_errors = true
+
 end
