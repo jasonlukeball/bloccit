@@ -71,6 +71,30 @@ RSpec.describe UsersController, type: :controller do
   end
 
 
+  describe "not signed in" do
+
+    let(:factory_user)  { create(:user) }
+
+    before do
+      post :create, user: attributes_for(:user)
+    end
+
+    it "returns http success" do
+      get :show, { id: factory_user.id }
+      expect(response).to have_http_status :success
+    end
+
+    it "it renders the user#show view" do
+      get :show, { id: factory_user.id }
+      expect(response).to render_template :show
+    end
+
+    it "it assigns factory_user to @ user" do
+      get :show, { id: factory_user.id }
+      expect(assigns(:user)).to eq(factory_user)
+    end
+
+  end
 
 
 end

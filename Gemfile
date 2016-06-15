@@ -24,6 +24,7 @@ group :development, :test do
   gem 'faker', '~> 1.6', '>= 1.6.3'
   gem 'shoulda'
   gem 'dotenv-rails'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 # Use for encrypting user passwords

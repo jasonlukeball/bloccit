@@ -22,6 +22,7 @@ class Post < ActiveRecord::Base
 
   # SCOPES
   default_scope { order('rank DESC') }
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topic.public' => true) }
 
   def self.ordered_by_title
     order('title ASC')

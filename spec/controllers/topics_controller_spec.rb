@@ -3,7 +3,7 @@ include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
 
-  let (:my_topic) { Topic.create!(name:  Faker::Hipster.sentence, description:   Faker::Hipster.paragraph) }
+  let (:my_topic) { create(:topic) }
 
   context "guest" do
 

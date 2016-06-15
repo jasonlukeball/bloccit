@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
 
-  let(:user) {User.create!(name: "Example User", email: "user@example.com", password: "password", password_confirmation: "password")}
-
+  let(:user) { create(:user) }
 
   describe "GET new" do
 
@@ -13,7 +12,6 @@ RSpec.describe SessionsController, type: :controller do
     end
 
   end
-
 
   describe "POST sessions" do
 
@@ -49,7 +47,6 @@ RSpec.describe SessionsController, type: :controller do
     end
 
   end
-
 
   describe "DELETE sessions/id" do
 

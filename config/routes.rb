@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get  'faq'      =>  'welcome#faq'
 
   # user authentication
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
   resources :sessions, only: [:new, :create, :destroy]
   post 'confirm_user' => 'users#confirm'
 

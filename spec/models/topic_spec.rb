@@ -5,7 +5,9 @@ RSpec.describe Topic, type: :model do
   let(:name)          { Faker::Hipster.sentence }
   let(:description)   { Faker::Hipster.paragraph }
   let(:public)        { true }
-  let(:topic)         { Topic.create!(name: name, description: description)}
+  let(:topic)         { create(:topic) }
+
+  let(:known_user) { create(:user, email: "jasonlukeball.me.com") }
 
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:posts) }
@@ -20,7 +22,7 @@ RSpec.describe Topic, type: :model do
   describe "attributes" do
 
     it "should have name, description and public attributes" do
-      expect(topic).to have_attributes(name: name, description: description, public: public)
+      expect(topic).to have_attributes(name: topic.name, description: topic.description, public: public)
     end
 
     it "should be public by default" do
@@ -31,6 +33,5 @@ RSpec.describe Topic, type: :model do
     it { is_expected.to have_many(:posts) }
 
   end
-
 
 end

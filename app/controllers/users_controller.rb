@@ -1,13 +1,22 @@
 class UsersController < ApplicationController
 
+
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.visible_to(current_user)
+  end
+
+
   def new
     @user = User.new
     @user.name = params[:user][:name]     if params[:user].present?
     @user.email = params[:user][:email]   if params[:user].present?
   end
 
+
   def confirm
   end
+
 
   def create
     @user = User.new
@@ -25,7 +34,6 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
 
 
 end

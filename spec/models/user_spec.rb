@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) {User.create!(name: "Example User", email: "user@example.com", password: "password")}
+  let(:user)  { create(:user) }
+  let(:user2) { create(:user) }
 
   it { is_expected.to have_many(:topics) }
   it { is_expected.to have_many(:posts) }
@@ -29,7 +30,7 @@ RSpec.describe User, type: :model do
   describe "attributes" do
 
     it "should have name and email attributes" do
-      expect(user).to have_attributes(name: "Example User", email: "user@example.com")
+      expect(user).to have_attributes(name: user.name, email: user.email)
     end
 
     it "responds to role" do
@@ -88,8 +89,8 @@ RSpec.describe User, type: :model do
 
   describe "invalid user" do
 
-    let(:user_with_invalid_name)  { User.new(name: "", email: "user@example.com") }
-    let(:user_with_invalid_email) { User.new(name: "Example User", email: "") }
+    let(:user_with_invalid_name) { build(:user, name: "") }
+    let(:user_with_invalid_email) { build(:user, email: "") }
 
     it "should be an invalid user due to a blank name" do
       expect(user_with_invalid_name).to_not be_valid
@@ -113,7 +114,6 @@ RSpec.describe User, type: :model do
 
   end
 
-
   describe "#favourite_for(post)" do
 
     before do
@@ -122,13 +122,23 @@ RSpec.describe User, type: :model do
     end
 
     it "returns nil if the user has not favourited the post" do
-      expect(user.favourite_for(@post)).to be_nil
+      expect(user2.favourite_for(@post)).to be_nil
     end
 
     it "returns the appropriate favourite if it exists" do
-      favourite = user.favourites.create!(post: @post)
+      favourite = user.favourites.find_by_post_id(@post.id)
       expect(user.favourite_for(@post)).to eq(favourite)
     end
+
+  end
+
+  describe ".avatar_url" do
+    let(:known_user) { create(:user, email: "jasonlukeball.me.com") }
+    it "returns the proper gravatar url for a know email entity" do
+      expected_gravater = "http://gravatar.com/avatar/3c54b88a4035a1da59b9914ef85312fc.png?s=28"
+      expect(known_user.avatar_url(28)).to eq(expected_gravater)
+    end
+
 
   end
 

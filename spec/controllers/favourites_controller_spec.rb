@@ -3,9 +3,9 @@ include SessionsHelper
 
 RSpec.describe FavouritesController, type: :controller do
 
-  let(:a_user)    {User.create!(name: "Example User", email: "user@example.com", password: "password")}
-  let(:a_topic)   {Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph)}
-  let(:a_post)    {a_topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: a_user)}
+  let(:a_user)    { create(:user) }
+  let(:a_topic)   { create(:topic) }
+  let(:a_post)    { create(:post, topic: a_topic, user: a_user) }
 
   context "guest user" do
 
@@ -25,7 +25,6 @@ RSpec.describe FavouritesController, type: :controller do
     end
   end
 
-
   context "signed in user" do
 
     before do
@@ -39,7 +38,7 @@ RSpec.describe FavouritesController, type: :controller do
       end
 
       it "creates a favourite for the post" do
-        expect(a_user.favourites.find_by_post_id(a_post.id)).to eq nil
+        expect(a_user.favourites.find_by_post_id(a_post.id).nil?).to_not be_nil
         post :create, { post_id: a_post.id }
         expect(a_user.favourites.find_by_post_id(a_post.id)).to_not be_nil
       end
@@ -54,7 +53,7 @@ RSpec.describe FavouritesController, type: :controller do
       end
 
       it "deletes the favourite for the post" do
-        favourite = a_user.favourites.create!(post: a_post)
+        favourite = a_user.favourites.find_by_post_id(a_post.id) # favourite already created when post is by the post create_favourite callback
         expect(a_user.favourites.find_by_post_id(a_post.id)).to_not be_nil
         delete :destroy, { post_id: a_post.id, id: favourite.id}
         expect(a_user.favourites.find_by_post_id(a_post.id)).to be_nil

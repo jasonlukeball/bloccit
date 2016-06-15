@@ -3,15 +3,13 @@ include SessionsHelper
 
 RSpec.describe CommentsController, type: :controller do
 
-  let(:user1)             {User.create!(name: "User1", email: "user1@example.com", password: "password")}
-  let(:user2)             {User.create!(name: "User2", email: "user2@example.com", password: "password")}
-  let(:admin_user)        {User.create!(name: "Admin User", email: "admin@example.com", password: "password", role: "admin")}
-
-  let(:a_topic)           {Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph)}
-  let(:user1_post)        {a_topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user1)}
+  let(:user1)             { create(:user) }
+  let(:user2)             { create(:user) }
+  let(:admin_user)        { create(:user,role: "admin") }
+  let(:a_topic)           { create(:topic) }
+  let(:user1_post)        { create(:post, topic: a_topic, user: user1) }
   let(:user1_comment)     {user1_post.comments.create!(body: Faker::Hipster.sentence, user: user1)}
   let(:user2_comment)     {user1_post.comments.create!(body: Faker::Hipster.sentence, user: user2)}
-
 
 
   context "guest user" do
@@ -31,7 +29,6 @@ RSpec.describe CommentsController, type: :controller do
     end
 
   end
-
 
   context "user doing CRUD" do
 
@@ -66,7 +63,6 @@ RSpec.describe CommentsController, type: :controller do
 
   end
 
-
   context "user attempting to delete another user's comments" do
 
     before do
@@ -88,8 +84,6 @@ RSpec.describe CommentsController, type: :controller do
 
   end
 
-
-
   context "admin attempting to delete another user's comments" do
 
     before do
@@ -110,11 +104,6 @@ RSpec.describe CommentsController, type: :controller do
     end
 
   end
-
-
-
-
-
 
 
 end

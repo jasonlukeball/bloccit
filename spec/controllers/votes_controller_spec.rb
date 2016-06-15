@@ -3,10 +3,10 @@ include SessionsHelper
 
 RSpec.describe VotesController, type: :controller do
 
-  let(:user)          { User.create!(name: "Example User", email: "user@example.com", password: "password", role: "member") }
-  let(:user2)         { User.create!(name: "Example User2", email: "user2@example.com", password: "password", role: "member") }
-  let(:a_topic)       { Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph) }
-  let(:a_post)        { a_topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user) }
+  let(:user)          { create(:user) }
+  let(:user2)         { create(:user) }
+  let(:a_topic)       { create(:topic) }
+  let(:a_post)        { create(:post, topic: a_topic)}
 
 
   context "guest" do
@@ -26,7 +26,6 @@ RSpec.describe VotesController, type: :controller do
     end
 
   end
-
 
   context "signed in user" do
 

@@ -2,11 +2,12 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe PostsController, type: :controller do
-  let(:my_user) { User.create!(name: "Example User", email: "user@example.com", password: "password") }
-  let(:other_user) { User.create!(name: "Other User", email: "other@example.com", password: "password", role: :member) }
-  let(:moderator_user) { User.create!(name: "Moderator User", email: "moderator@example.com", password: "password", role: :moderator) }
-  let(:my_topic) { Topic.create!(name:  Faker::Hipster.sentence, description: Faker::Hipster.paragraph) }
-  let(:my_post) { my_topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: my_user) }
+
+  let(:my_user)         { create(:user) }
+  let(:other_user)      { create(:user) }
+  let(:moderator_user)  { create(:user, role: :moderator) }
+  let(:my_topic)        { create(:topic) }
+  let(:my_post)         { create(:post, topic: my_topic, user: my_user) }
 
   context "guest" do
     describe "GET show" do
@@ -370,9 +371,6 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-
-
-
   context "moderators can update any post" do
 
     before do
@@ -431,11 +429,5 @@ RSpec.describe PostsController, type: :controller do
 
 
   end
-
-
-
-
-
-
 
 end

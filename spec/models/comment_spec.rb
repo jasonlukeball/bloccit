@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
 
-  let (:user)       { User.create!(name: "Example User", email: "user@example.com", password: "password")}
-  let (:topic)      { Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph)}
-  let (:post)       { topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: user)}
-  let (:comment)    { Comment.create!(body: "New Comment Body", commentable: post, user: user) }
+  let(:user)        { create(:user) }
+  let(:topic)       { create(:topic) }
+  let(:post)        { create(:post, user: user) }
+  let(:comment)     { Comment.create!(body: "New Comment Body", commentable: post, user: user) }
 
   it { should belong_to(:commentable) }
   it { is_expected.to belong_to(:user) }
@@ -26,16 +26,8 @@ RSpec.describe Comment, type: :model do
     end
 
     it "sends an email to users who have favourites the post" do
-      favourite = user.favourites.create(post: post)
       expect(FavouriteMailer).to receive(:new_comment).with(user, post, @another_comment).and_return(double(deliver_now: true))
       @another_comment.save!
     end
-
-    it "does not send emails to users who have not favourites the post" do
-      expect(FavouriteMailer).not_to receive(:new_comment)
-      @another_comment.save!
-    end
-
   end
-
 end

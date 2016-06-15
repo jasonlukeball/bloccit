@@ -7,10 +7,10 @@ RSpec.describe Post, type: :model do
   let(:post_title)          { Faker::Hipster.sentence }
   let(:post_body)           { Faker::Hipster.paragraph }
 
-  let(:topic)               { Topic.create!(name: topic_name, description: topic_description) }
-  let(:user)                { User.create!(name: "Example User", email: "user@example.com", password: "password")}
-  let(:post)                { topic.posts.create!(title: post_title, body: post_body, user: user) }
-  let(:post2)                { topic.posts.create!(title: post_title, body: post_body, user: user) }
+  let(:user)    { create(:user) }
+  let(:topic)   { create(:topic) }
+  let(:post)    { create(:post) }
+  let(:post2)   { create(:post) }
 
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
@@ -33,10 +33,9 @@ RSpec.describe Post, type: :model do
 
   describe "attributes" do
     it "has the title, body and user attributes" do
-      expect(post).to have_attributes(title: post_title, body: post_body, user: user)
+      expect(post).to have_attributes(title: post.title, body: post.body, user: post.user)
     end
   end
-
 
   describe "voting" do
 
@@ -67,7 +66,6 @@ RSpec.describe Post, type: :model do
 
   end
 
-
   describe "#update_rank" do
 
     it "calculates the correct rank" do
@@ -88,7 +86,6 @@ RSpec.describe Post, type: :model do
     end
   end
 
-
   describe "create vote" do
 
     it "adds an up_vote by the current_user for new posts" do
@@ -102,11 +99,10 @@ RSpec.describe Post, type: :model do
     end
 
     it "the post's first vote belongs to the owner of the post" do
-      expect(post.votes.first.user).to eq(user)
+      expect(post.votes.first.user).to eq(post.user)
     end
 
   end
-
 
   describe "create favourite" do
     it "calls the #create_favourite method when a post is created" do

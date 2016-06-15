@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Label, type: :model do
 
-  let(:a_user)    {User.create!(name: "Example User", email: "user@example.com", password: "password")}
-  let(:a_topic)   {Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph)}
-  let(:a_post)    {a_topic.posts.create!(title: Faker::Hipster.sentence, body: Faker::Hipster.paragraph, user: a_user)}
-  let(:label1)    {Label.create!(name: "Example Label 1")}
-  let(:label2)    {Label.create!(name: "Example Label 2")}
+  let(:a_user)      { create(:user) }
+  let(:a_topic)     { create(:topic) }
+  let(:a_post)      { create(:post) }
+  let(:label1)      { Label.create!(name: "Example Label 1") }
+  let(:label2)      { Label.create!(name: "Example Label 2") }
 
   it { is_expected.to have_many :labelings }
   it { is_expected.to have_many :topics }
