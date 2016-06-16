@@ -5,7 +5,7 @@ RSpec.describe Comment, type: :model do
   let(:user)        { create(:user) }
   let(:topic)       { create(:topic) }
   let(:post)        { create(:post, user: user) }
-  let(:comment)     { Comment.create!(body: "New Comment Body", commentable: post, user: user) }
+  let(:comment)     { create(:comment) }
 
   it { should belong_to(:commentable) }
   it { is_expected.to belong_to(:user) }
@@ -14,7 +14,7 @@ RSpec.describe Comment, type: :model do
 
   describe "attributes" do
     it "has a body attribute" do
-      expect(comment).to have_attributes(body: "New Comment Body")
+      expect(comment).to have_attributes(body: comment.body)
     end
   end
 

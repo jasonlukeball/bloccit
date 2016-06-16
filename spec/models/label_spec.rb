@@ -5,8 +5,8 @@ RSpec.describe Label, type: :model do
   let(:a_user)      { create(:user) }
   let(:a_topic)     { create(:topic) }
   let(:a_post)      { create(:post) }
-  let(:label1)      { Label.create!(name: "Example Label 1") }
-  let(:label2)      { Label.create!(name: "Example Label 2") }
+  let(:label1)      { create(:label) }
+  let(:label2)      { create(:label, name: "ABC") } # had to add this, seemed the spec was using label1 twice
 
   it { is_expected.to have_many :labelings }
   it { is_expected.to have_many :topics }

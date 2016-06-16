@@ -1,0 +1,20 @@
+<div class="media">
+  <div class="media-body">
+    <div class="row">
+        <div class="col-xs-1">
+            <%= image_tag post.user.avatar_url(28) %>
+        </div>
+        <div class="col-xs-11">
+            <h4 class="media-heading">
+              <%= link_to post.title, topic_post_path(post.topic, post) %>
+              <br>
+              <small>
+                <%= pluralize(post.votes.count, 'Vote', 'Votes') %> |
+                <%= pluralize(post.comments.count, 'Comment', 'Comments') %>
+              </small>
+              <br>
+            </h4>
+        </div>
+    </div>
+  </div>
+</div>

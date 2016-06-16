@@ -8,8 +8,8 @@ RSpec.describe CommentsController, type: :controller do
   let(:admin_user)        { create(:user,role: "admin") }
   let(:a_topic)           { create(:topic) }
   let(:user1_post)        { create(:post, topic: a_topic, user: user1) }
-  let(:user1_comment)     {user1_post.comments.create!(body: Faker::Hipster.sentence, user: user1)}
-  let(:user2_comment)     {user1_post.comments.create!(body: Faker::Hipster.sentence, user: user2)}
+  let(:user1_comment)     { create(:comment, user: user1, commentable: user1_post) }
+  let(:user2_comment)     { create(:comment, user: user2, commentable: user1_post) }
 
 
   context "guest user" do

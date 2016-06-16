@@ -52,4 +52,18 @@ class User < ActiveRecord::Base
   end
 
 
+  def has_posts?
+    self.posts.any?
+  end
+
+  def has_comments?
+    self.comments.any?
+  end
+
+  def has_favourites?
+    self.favourites.any?
+  end
+
+
+
 end

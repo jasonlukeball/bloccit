@@ -5,7 +5,7 @@ RSpec.describe Vote, type: :model do
   let(:user)    { create(:user) }
   let(:topic)   { create(:topic) }
   let(:post)    { create(:post) }
-  let(:vote)    { Vote.create!(value: 1, post: post, user: user) }
+  let(:vote)    { create(:vote, post: post) } # added this otherwise #update_post was receiving a new post from the vote factory
 
   it { is_expected.to belong_to(:post) }
   it { is_expected.to belong_to(:user) }

@@ -24,7 +24,6 @@ RSpec.describe VotesController, type: :controller do
         expect(response).to redirect_to(new_session_path)
       end
     end
-
   end
 
   context "signed in user" do
@@ -65,7 +64,6 @@ RSpec.describe VotesController, type: :controller do
         post :up_vote, post_id: a_post.id
         expect(response).to redirect_to(a_topic)
       end
-
     end
 
 
@@ -100,19 +98,6 @@ RSpec.describe VotesController, type: :controller do
         post :down_vote, post_id: a_post.id
         expect(response).to redirect_to(a_topic)
       end
-
     end
-
-
-
-
-
-
-
-
-
-
   end
-
-
 end

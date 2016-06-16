@@ -11,7 +11,9 @@ class Comment < ActiveRecord::Base
   private
 
   def send_favourite_emails
-    self.commentable.favourites.each {|f| FavouriteMailer.new_comment(f.user, self.commentable, self).deliver_now }
+    if self.commentable.class.name == "Post"
+      self.commentable.favourites.each {|f| FavouriteMailer.new_comment(f.user, self.commentable, self).deliver_now }
+    end
   end
 
 end
