@@ -26,7 +26,8 @@ users = User.all
   Topic.create!(
     user: admin,
     name: Faker::Hipster.sentence,
-    description: Faker::Hipster.paragraph
+    description: Faker::Hipster.paragraph,
+    public: [true, false].sample
   )
 end
 

@@ -53,6 +53,19 @@ RSpec.describe Topic, type: :model do
     end
 
 
+    describe "publicly_viewable" do
+      it "returns an array of all public topics" do
+        expect(Topic.publicly_viewable).to eq(Topic.where(public: true))
+      end
+    end
+
+    describe "privately_viewable" do
+      it "returns an array of all private topics" do
+        expect(Topic.privately_viewable).to eq(Topic.where(public: false))
+      end
+    end
+
+
 
   end
 
