@@ -3,7 +3,8 @@ include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
 
-  let (:my_topic) { create(:topic) }
+  let (:my_topic)           { create(:topic) }
+  let (:my_private_topic)   { create(:topic, public: false) }
 
   context "guest" do
 
@@ -13,9 +14,14 @@ RSpec.describe TopicsController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it "assigns Topic.all to topic" do
+      it "assigns all public topics to @topics" do
         get :index
-        expect(assigns(:topics)).to eq([my_topic])
+        expect(assigns(:topics)).to eq(Topic.where(public: true))
+      end
+
+      it "does not include private topics in @topics" do
+        get :index
+        expect(assigns(:topics)).not_to include(my_private_topic)
       end
     end
 
@@ -33,6 +39,11 @@ RSpec.describe TopicsController, type: :controller do
       it "assigns my_topic to @topic" do
         get :show, {id: my_topic.id}
         expect(assigns(:topic)).to eq(my_topic)
+      end
+
+      it "redirects for private topics" do
+        get :show, {id: my_private_topic.id}
+        expect(response).to redirect_to(new_session_path)
       end
     end
 
@@ -89,7 +100,7 @@ RSpec.describe TopicsController, type: :controller do
 
       it "assigns Topic.all to topic" do
         get :index
-        expect(assigns(:topics)).to eq([my_topic])
+        expect(assigns(:topics)).to eq(Topic.all)
       end
     end
 
@@ -163,7 +174,7 @@ RSpec.describe TopicsController, type: :controller do
 
       it "assigns Topic.all to topic" do
         get :index
-        expect(assigns(:topics)).to eq([my_topic])
+        expect(assigns(:topics)).to eq(Topic.all)
       end
     end
 
@@ -288,7 +299,7 @@ RSpec.describe TopicsController, type: :controller do
 
       it "assigns Topic.all to topic" do
         get :index
-        expect(assigns(:topics)).to eq([my_topic])
+        expect(assigns(:topics)).to eq(Topic.all)
       end
     end
 

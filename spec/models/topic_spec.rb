@@ -34,4 +34,26 @@ RSpec.describe Topic, type: :model do
 
   end
 
+  describe "scopes" do
+
+    before do
+      @public_topic = Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph)
+      @private_topic = Topic.create!(name: Faker::Hipster.sentence, description: Faker::Hipster.paragraph, public: false)
+    end
+
+    describe "visible_to(user)" do
+      it "returns all topics if the user is present" do
+        user = User.new
+        expect(Topic.visible_to(user)).to eq(Topic.all)
+      end
+
+      it "only returns public topics if the user is not present" do
+        expect(Topic.visible_to(nil)).to eq(Topic.where(public: true))
+      end
+    end
+
+
+
+  end
+
 end
