@@ -7,11 +7,15 @@ class Comment < ActiveRecord::Base
 
   after_create :send_favourite_emails
 
+  default_scope { order('updated_at DESC') }
+
 
   private
 
   def send_favourite_emails
-    self.commentable.favourites.each {|f| FavouriteMailer.new_comment(f.user, self.commentable, self).deliver_now }
+    if self.commentable.class.name == "Post"
+      self.commentable.favourites.each {|f| FavouriteMailer.new_comment(f.user, self.commentable, self).deliver_now }
+    end
   end
 
 end

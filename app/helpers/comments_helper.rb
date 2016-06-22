@@ -7,9 +7,9 @@ module CommentsHelper
 
   def delete_comment_link(comment)
     if comment.commentable.class.name == "Topic"
-      link_to "Delete", topic_comment_path(comment.commentable.id, comment), method: :delete
+      link_to "Delete", topic_comment_path(comment.commentable.id, comment), method: :delete, remote: true
     elsif comment.commentable.class.name == "Post"
-      link_to "Delete", post_comment_path(comment.commentable.id, comment), method: :delete
+      link_to "Delete", post_comment_path(comment.commentable.id, comment), method: :delete, remote: true
     end
   end
 

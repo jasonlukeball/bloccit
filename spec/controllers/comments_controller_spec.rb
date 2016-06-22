@@ -16,14 +16,14 @@ RSpec.describe CommentsController, type: :controller do
 
     describe "POST create" do
       it "redirects the guest to sign in" do
-        post :create, post_id: user1_post.id, comment: {body: Faker::Hipster.sentence}
+        post :create, format: :js, post_id: user1_post.id, comment: {body: Faker::Hipster.sentence}
         expect(response).to redirect_to(new_session_path)
       end
     end
 
     describe "DELETE destroy" do
       it "redirects the guest to sign in" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
         expect(response).to redirect_to(new_session_path)
       end
     end
@@ -38,26 +38,25 @@ RSpec.describe CommentsController, type: :controller do
 
     describe "POST create" do
       it "increases the number of comments by 1" do
-        expect{post :create, post_id: user1_post.id, comment: {body: Faker::Hipster.sentence, user: user1}}.to change(Comment,:count).by(1)
+        expect{post :create, format: :js, post_id: user1_post.id, comment: {body: Faker::Hipster.sentence, user: user1}}.to change(Comment,:count).by(1)
       end
 
       it "redirects to the post show view" do
-        post :create, post_id: user1_post.id, comment: {body: Faker::Hipster.sentence, user: user1}
-        expect(response).to redirect_to([a_topic, user1_post])
+        post :create, format: :js, post_id: user1_post.id, comment: {body: Faker::Hipster.sentence, user: user1}
+        expect(response).to have_http_status :success
       end
     end
 
     describe "DELETE destroy" do
       it "deletes the comment" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
         count = Comment.where(id: user1_comment.id).count
         expect(count).to eq 0
       end
 
-      it "redirects to the post show view" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
-        expect(response).to redirect_to([a_topic, user1_post])
-
+      it "returns http success" do
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
+        expect(response).to have_http_status(:success)
       end
     end
 
@@ -71,13 +70,13 @@ RSpec.describe CommentsController, type: :controller do
 
     describe "DELETE destroy" do
       it "does not delete the comment" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
         count = Comment.where(commentable_id: user1_comment.id).count
         expect(count).to eq 1
       end
 
       it "redirects to the post show view" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
         expect(response).to redirect_to([a_topic, user1_post])
       end
     end
@@ -92,14 +91,14 @@ RSpec.describe CommentsController, type: :controller do
 
     describe "DELETE destroy" do
       it "deletes the comment" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
         count = Comment.where(id: user1_comment.id).count
         expect(count).to eq 0
       end
 
-      it "redirects to the post show view" do
-        delete :destroy, post_id: user1_post.id, id: user1_comment.id
-        expect(response).to redirect_to([a_topic, user1_post])
+      it "returns http success" do
+        delete :destroy, format: :js, post_id: user1_post.id, id: user1_comment.id
+        expect(response).to have_http_status(:success)
       end
     end
 
