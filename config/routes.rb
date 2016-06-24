@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   resources :labels, only: [:show]
 
   # api
-  namespace :api do
+  namespace :api, path: nil, defaults: {format: 'json'} do
     namespace :v1 do
       resources :users, only: [:index, :show]
       resources :topics, only: [:index, :show]
