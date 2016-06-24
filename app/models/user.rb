@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :favourites, dependent: :destroy
 
+  before_create :generate_auth_token
   before_save :downcase_email
   before_save :capitalize_name
   before_save :define_role
@@ -49,6 +50,13 @@ class User < ActiveRecord::Base
   def avatar_url(size)
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+  end
+
+  def generate_auth_token
+    loop do
+      self.auth_token = SecureRandom.base64(64)
+      break unless User.find_by(auth_token: self.auth_token)
+    end
   end
 
 
