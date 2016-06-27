@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get  'about'    =>  'welcome#about'
   get  'contact'  =>  'welcome#contact'
   get  'faq'      =>  'welcome#faq'
+  get  'api'      =>  'welcome#api'
 
   # user authentication
   resources :users, only: [:new, :create, :show]
@@ -42,7 +43,7 @@ Rails.application.routes.draw do
   resources :labels, only: [:show]
 
   # api
-  namespace :api, path: nil, defaults: {format: 'json'} do
+  namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :create, :update]
       resources :topics, except: [:edit, :new] do

@@ -12,4 +12,7 @@ class WelcomeController < ApplicationController
   def faq
   end
 
+  def api
+  end
+
 end

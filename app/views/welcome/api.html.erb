@@ -1,0 +1,198 @@
+<h1>Bloccit API</h1>
+
+<br>
+<h3>Users</h3>
+<hr>
+<br>
+<h4>List Users</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/users \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Get User</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/users/user_id \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Create User</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/users \
+    -X POST \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+
+    { "user":
+        {
+            "name":     "John Snow",
+            "email":    "johnsnow@example.com",
+            "password": "password",
+            "role":     "admin"
+        }
+    }
+  </code>
+</pre>
+<br>
+
+
+<h3>Topics</h3>
+<hr>
+<br>
+<h4>List Topics</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Get Topic</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics/topic_id \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Create Topic</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics \
+    -X POST \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+    {
+        "name": "Created Topic via API",
+        "description": "This topic was created via the API",
+        "public": true
+    }
+  </code>
+</pre>
+<br>
+<h4>Update Topic</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics/topic_id \
+    -X PUT \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+    {
+        "name": "Updated Topic via API",
+        "description": "This topic was updates via the API",
+        "public": true
+    }
+  </code>
+</pre>
+<br>
+<h4>Delete Topic</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics/topic_id \
+    -X DELETE \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+  </code>
+</pre>
+
+
+<br>
+<h3>Posts</h3>
+<hr>
+<br>
+<h4>List Posts</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/posts \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Get Post</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/posts/post_id \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Create Post</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics/topic_id/posts/ \
+    -X POST \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+    {
+        "title": "Post Created from API",
+        "body": "Post Created from API Post Created from API"
+    }
+  </code>
+</pre>
+<br>
+<h4>Update Post</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics/topic_id/posts/post_id \
+    -X PUT \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+    {
+        "title": "Post Updated from API",
+        "body": "Post Updated from API Post Created from API"
+    }
+  </code>
+</pre>
+<br>
+<h4>Delete Post</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/topics/topic_id/posts/post_id \
+    -X DELETE \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json' \
+    -H 'Content-Type:application/json'
+  </code>
+</pre>
+
+
+<br>
+<h3>Comments</h3>
+<hr>
+<br>
+<h4>List Comments</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/comments \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+<br>
+<h4>Get Comments</h4>
+<pre>
+  <code>
+    curl http://bloccit.jasonlukeball.com/api/v1/comments/comment_id \
+    -H 'Authorization: Token SkHcRHe8filXMX9os3twmYV2LRYADzlOoX99wH==' \
+    -H 'Accept:application/json'
+  </code>
+</pre>
+
+<br><br><br><br><br><br>
