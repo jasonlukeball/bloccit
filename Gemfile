@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-ruby '2.2.1'
+ruby '2.2.2'
 
 group :production do
   # Postgres database on heroku
