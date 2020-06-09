@@ -1,9 +1,9 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :post do
-    title Faker::Hipster.sentence
-    body Faker::Hipster.paragraph
+    title { Faker::Hipster.sentence }
+    body { Faker::Hipster.paragraph }
     topic
     user
-    rank 0.0
+    rank { 0.0 }
   end
 end

@@ -1,2 +1,2 @@
-class Advertisement < ActiveRecord::Base
+class Advertisement < ApplicationRecord
 end

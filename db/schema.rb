@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -26,9 +25,8 @@ ActiveRecord::Schema.define(version: 20160622115238) do
     t.integer  "question_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
   end
-
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -36,35 +34,32 @@ ActiveRecord::Schema.define(version: 20160622115238) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
-    t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
-
-  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
-  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "favourites", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_favourites_on_post_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
   end
-
-  add_index "favourites", ["post_id"], name: "index_favourites_on_post_id"
-  add_index "favourites", ["user_id"], name: "index_favourites_on_user_id"
 
   create_table "labelings", force: :cascade do |t|
     t.integer  "label_id"
-    t.integer  "labelable_id"
     t.string   "labelable_type"
+    t.integer  "labelable_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["label_id"], name: "index_labelings_on_label_id"
+    t.index ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
   end
-
-  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
-  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
 
   create_table "labels", force: :cascade do |t|
     t.string   "name"
@@ -80,10 +75,9 @@ ActiveRecord::Schema.define(version: 20160622115238) do
     t.integer  "topic_id"
     t.integer  "user_id"
     t.float    "rank"
+    t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
-
-  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
@@ -100,9 +94,8 @@ ActiveRecord::Schema.define(version: 20160622115238) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "topic_id"
+    t.index ["topic_id"], name: "index_sponsored_posts_on_topic_id"
   end
-
-  add_index "sponsored_posts", ["topic_id"], name: "index_sponsored_posts_on_topic_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -111,9 +104,8 @@ ActiveRecord::Schema.define(version: 20160622115238) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "user_id"
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
-
-  add_index "topics", ["user_id"], name: "index_topics_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -131,9 +123,8 @@ ActiveRecord::Schema.define(version: 20160622115238) do
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_votes_on_post_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
-
-  add_index "votes", ["post_id"], name: "index_votes_on_post_id"
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end

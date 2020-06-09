@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
-ruby '2.2.2'
+gem 'rails', '>= 5.0.0.rc2', '< 5.1'
+ruby '2.5.0'
 
 group :production do
   # Postgres database on heroku
@@ -13,7 +13,7 @@ group :production do
 end
 
 group :development do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3', '< 1.4'
   gem 'web-console', '~> 2.0'
 end
 
@@ -24,7 +24,7 @@ group :development, :test do
   gem 'faker', '~> 1.6', '>= 1.6.3'
   gem 'shoulda'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_bot_rails'
 end
 
 # Use for encrypting user passwords
@@ -42,3 +42,4 @@ gem 'turbolinks'
 # Bootstrap for style
 gem 'bootstrap-sass'
 gem 'intercom-rails'
+gem 'rails-controller-testing'

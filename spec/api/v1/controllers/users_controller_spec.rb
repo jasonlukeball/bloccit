@@ -13,19 +13,19 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     it "GET show returns http unauthenticated" do
-      get :show, id: my_user.id
+      get :show, params: {id: my_user.id}
       expect(response).to have_http_status(401)
     end
 
     it "POST create returns http unauthenticated" do
       new_user = build(:user)
-      post :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      post :create, params: {user: { name: new_user.name, email: new_user.email, password: new_user.password }}
       expect(response).to have_http_status(401)
     end
 
     it "PUT update returns http unauthenticated" do
       new_user = build(:user)
-      put :update, id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      put :update, params: {id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }}
       expect(response).to have_http_status(401)
     end
 
@@ -45,19 +45,19 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     it "GET show returns http forbidden" do
-      get :show, id: my_user.id
+      get :show, params: {id: my_user.id}
       expect(response).to have_http_status(403)
     end
 
     it "POST create returns http unauthenticated" do
       new_user = build(:user)
-      post :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      post :create, params: {user: { name: new_user.name, email: new_user.email, password: new_user.password }}
       expect(response).to have_http_status(403)
     end
 
     it "PUT update returns http unauthenticated" do
       new_user = build(:user)
-      put :update, id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      put :update, params: {id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }}
       expect(response).to have_http_status(403)
     end
 
@@ -89,7 +89,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     describe "GET show" do
-      before { get :show, id: my_user.id }
+      before { get :show, params: {id: my_user.id }}
 
       it "returns http success" do
         expect(response).to have_http_status :success
@@ -111,7 +111,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
         before do
           @new_user = build(:user, role: 'admin')
-          put :update, id: my_user.id, user: { name: @new_user.name, email: @new_user.email, password: @new_user.password, role: @new_user.role }
+          put :update, params: {id: my_user.id, user: { name: @new_user.name, email: @new_user.email, password: @new_user.password, role: @new_user.role }}
         end
 
         it "returns http success" do
@@ -134,7 +134,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       context "with invalid attributes" do
 
         before do
-          put :update, id: my_user.id, user: { name: "", email: "bademail@", password: "short" }
+          put :update, params: {id: my_user.id, user: { name: "", email: "bademail@", password: "short" }}
         end
 
         it "returns http error 400" do
@@ -155,7 +155,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
         before do
           @new_user = build(:user, role: "admin")
-          post :create, user: { name: @new_user.name, email: @new_user.email, password: @new_user.password, role: @new_user.role }
+          post :create, params: {user: { name: @new_user.name, email: @new_user.email, password: @new_user.password, role: @new_user.role }}
         end
 
         it "returns http success" do
@@ -168,7 +168,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
         it "created a user with the correct attributes" do
           response_json = JSON.parse(response.body)
-          expect(response_json['name']).to eq @new_user.name
+          expect(response_json['name'].downcase).to eq @new_user.name.downcase
           expect(response_json['email']).to eq @new_user.email
           expect(response_json['role']).to eq @new_user.role
         end
@@ -177,7 +177,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       context "with invalid attributes" do
 
         before do
-          post :create, user: { name: "", email: "notanem@", password: "short" }
+          post :create, params: {user: { name: "", email: "notanem@", password: "short" }}
         end
 
         it "returns http error" do

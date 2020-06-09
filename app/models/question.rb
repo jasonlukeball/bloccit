@@ -1,3 +1,3 @@
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   has_many :answers
 end

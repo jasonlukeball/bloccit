@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :topic do
-    name Faker::Name.name
-    description Faker::Hipster.paragraph
+    name { Faker::Name.name }
+    description { Faker::Hipster.paragraph }
   end
 end

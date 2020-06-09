@@ -11,14 +11,14 @@ RSpec.describe FavouritesController, type: :controller do
 
     describe "POST create" do
       it "redirects the guest to sign in" do
-        post :create, { post_id: a_post.id }
+        post :create, params: { post_id: a_post.id }
         expect(response).to redirect_to new_session_path
       end
 
       describe "DELETE destroy" do
         it "redirects the guest to sign in" do
           favourite = a_user.favourites.create!(post: a_post)
-          delete :destroy, { post_id: a_post.id, id: favourite.id}
+          delete :destroy, params: { post_id: a_post.id, id: favourite.id}
           expect(response).to redirect_to new_session_path
         end
       end
@@ -33,13 +33,13 @@ RSpec.describe FavouritesController, type: :controller do
 
     describe "POST create" do
       it "redirects to the post show view" do
-        post :create, { post_id: a_post.id }
+        post :create, params: { post_id: a_post.id }
         expect(response).to redirect_to([a_topic, a_post])
       end
 
       it "creates a favourite for the post" do
         expect(a_user.favourites.find_by_post_id(a_post.id).nil?).to_not be_nil
-        post :create, { post_id: a_post.id }
+        post :create, params: { post_id: a_post.id }
         expect(a_user.favourites.find_by_post_id(a_post.id)).to_not be_nil
       end
     end
@@ -47,15 +47,15 @@ RSpec.describe FavouritesController, type: :controller do
     describe "DELETE destroy" do
       it "redirects to the post show view" do
         favourite = a_user.favourites.create!(post: a_post)
-        delete :destroy, { post_id: a_post.id, id: favourite.id}
-        post :create, { post_id: a_post.id }
+        delete :destroy, params: { post_id: a_post.id, id: favourite.id}
+        post :create, params: { post_id: a_post.id }
         expect(response).to redirect_to([a_topic, a_post])
       end
 
       it "deletes the favourite for the post" do
         favourite = a_user.favourites.find_by_post_id(a_post.id) # favourite already created when post is by the post create_favourite callback
         expect(a_user.favourites.find_by_post_id(a_post.id)).to_not be_nil
-        delete :destroy, { post_id: a_post.id, id: favourite.id}
+        delete :destroy, params: { post_id: a_post.id, id: favourite.id}
         expect(a_user.favourites.find_by_post_id(a_post.id)).to be_nil
       end
     end

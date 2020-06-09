@@ -12,7 +12,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
     end
 
     it "GET show returns http success" do
-      get :show, id: my_comment.id
+      get :show, params: {id: my_comment.id}
       expect(response).to have_http_status :success
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
     end
 
     it "GET show returns http success" do
-      get :show, id: my_comment.id
+      get :show, params: {id: my_comment.id}
       expect(response).to have_http_status :success
     end
   end

@@ -34,36 +34,36 @@ RSpec.describe UsersController, type: :controller do
   describe "POST create" do
 
     it "returns a http redirect" do
-      post :create, user: user_attributes
+      post :create, params: {user: user_attributes}
       expect(response).to have_http_status :redirect
     end
 
     it "creates a new user" do
-      expect{post :create, user: user_attributes}.to change(User, :count).by(1)
+      expect{post :create, params: {user: user_attributes}}.to change(User, :count).by(1)
     end
 
     it "sets the name correctly" do
-      post :create, user: user_attributes
+      post :create, params: {user: user_attributes}
       expect(assigns(:user).name).to eq user_attributes[:name]
     end
 
     it "sets the email correctly" do
-      post :create, user: user_attributes
+      post :create, params: {user: user_attributes}
       expect(assigns(:user).email).to eq user_attributes[:email]
     end
 
     it "sets the password correctly" do
-      post :create, user: user_attributes
+      post :create, params: {user: user_attributes}
       expect(assigns(:user).password).to eq user_attributes[:password]
     end
 
     it "sets the password_confirmation correctly" do
-      post :create, user: user_attributes
+      post :create, params: {user: user_attributes}
       expect(assigns(:user).password_confirmation).to eq user_attributes[:password_confirmation]
     end
 
     it "logs the user in after sign up" do
-      post :create, user: user_attributes
+      post :create, params: {user: user_attributes}
       expect(session[:user_id]).to eq assigns(:user).id
     end
 
@@ -76,21 +76,21 @@ RSpec.describe UsersController, type: :controller do
     let(:factory_user)  { create(:user) }
 
     before do
-      post :create, user: attributes_for(:user)
+      post :create, params: {user: attributes_for(:user)}
     end
 
     it "returns http success" do
-      get :show, { id: factory_user.id }
+      get :show, params: { id: factory_user.id }
       expect(response).to have_http_status :success
     end
 
     it "it renders the user#show view" do
-      get :show, { id: factory_user.id }
+      get :show, params: { id: factory_user.id }
       expect(response).to render_template :show
     end
 
     it "it assigns factory_user to @ user" do
-      get :show, { id: factory_user.id }
+      get :show, params: { id: factory_user.id }
       expect(assigns(:user)).to eq(factory_user)
     end
 
